@@ -1,0 +1,7 @@
+{
+  "targets": [
+    "https://google.com",
+    "https://github.com",
+    "http://localhost:8080/status"
+  ]
+}
