@@ -12,7 +12,7 @@ func New() *Store {
 }
 
 // UpdateResult saves the latest result for a URL
-// INTENTIONAL GAP: This map access is not thread-safe!
+// TODO: This map access is not thread-safe!
 // Concurrent writes from the checker and reads from the server will cause a panic eventually.
 func (s *Store) UpdateResult(url string, result interface{}) {
 	s.results[url] = result

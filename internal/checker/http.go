@@ -31,8 +31,7 @@ func CheckSite(url string) CheckResult {
 		return result
 	}
 
-	// INTENTIONAL GAP: Not closing resp.Body in all cases (defer is better, but this is "hackathon" style)
-	// Also not checking status code properly, just assuming no error == UP
+	// TODO: Make more robust
 	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
 		result.Status = "UP"
 	} else {

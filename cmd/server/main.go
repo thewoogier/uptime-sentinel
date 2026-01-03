@@ -16,11 +16,9 @@ func main() {
 	fmt.Println("Starting Uptime Sentinel...")
 
 	// 1. Load Configuration
-	// INTENTIONAL GAP: The path is hardcoded relative to where the binary is run.
-	// This reinforces the ambiguity if run from the wrong directory.
+	// TODO: Fix the path being hardcoded relative to where the binary is run.
 	targets, err := config.LoadTargets("./configs/targets.json")
 	if err != nil {
-		// Panic is a bit harsh, but fits the "messy startup" vibe
 		log.Panicf("Failed to load targets: %v", err)
 	}
 
@@ -35,15 +33,13 @@ func main() {
 	go func() {
 		for {
 			for _, url := range targets {
-				// INTENTIONAL GAP: Launching a goroutine for every check without a worker pool?
-				// Might get messy if targets list is huge.
+				// TODO: Fix launching a goroutine for every check without a worker pool?
 				go func(u string) {
 					res := checker.CheckSite(u)
 					db.UpdateResult(u, res)
 					fmt.Printf("Checked %s: %s\n", u, res.Status)
 				}(url)
 			}
-			// Hardcoded interval
 			time.Sleep(10 * time.Second)
 		}
 	}()
@@ -52,8 +48,7 @@ func main() {
 	http.HandleFunc("/status", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 		data := db.GetAll()
-		
-		// Manual JSON encoding? Nah, let's use the encoder
+
 		if err := json.NewEncoder(w).Encode(data); err != nil {
 			http.Error(w, "Failed to encode response", 500)
 		}
@@ -61,6 +56,6 @@ func main() {
 
 	port := ":8080"
 	fmt.Printf("Server listening on port %s\n", port)
-	// INTENTIONAL GAP: Ignoring errors from ListenAndServe
+	// TODO: Better error handling from ListenAndServe
 	http.ListenAndServe(port, nil)
 }
