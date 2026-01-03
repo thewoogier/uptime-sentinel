@@ -1,8 +1,9 @@
 # Uptime Sentinel
 
-A lightweight, modern infrastructure monitoring tool written in Go. 
+A lightweight, modern infrastructure monitoring tool written in Go.
 
 ## Features
+
 - Real-time HTTP health checks
 - In-memory status storage
 - JSON API for integration with dashboards
@@ -11,6 +12,7 @@ A lightweight, modern infrastructure monitoring tool written in Go.
 ## Getting Started
 
 ### Prerequisites
+
 - Go 1.16+
 
 ### Installation
@@ -25,6 +27,7 @@ The application requires a configuration file to know which services to monitor.
 **You MUST create a `targets.json` file in the `configs/` directory before running the application.**
 
 A template is provided:
+
 ```bash
 cp configs/targets.json.example configs/targets.json
 ```
@@ -45,9 +48,10 @@ The server will start on port `8080`.
 
 ## Development
 
-This project is a work in progress. 
+This project is a work in progress.
 TODO:
-- [ ] Add support for custom intervals
+
+- [ ] Add support for a custom interval
 - [ ] Implement persistent storage (Redis/Postgres)
 - [ ] Fix race conditions in the store map
 - [ ] Add Dockerfile
